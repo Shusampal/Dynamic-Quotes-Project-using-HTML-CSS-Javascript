@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhai+2&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playball&display=swap" rel="stylesheet">
+    <title>Dynamic Quotes Project</title>
+    <style>
+        body{
+            margin: 0px;
+            padding: 0px;
+            background: rgb(0, 0, 47);
+        }
+        .box{
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: auto;
+            margin-top: 30vh;
+            height: 62vh;
+        }
+
+        #quotes{
+            font-family: 'Ubuntu', sans-serif;
+            color: rgb(80, 88, 35);
+            font-weight: bolder;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            width: 600px;
+            height: 600px;
+            background: url(./bulb-546859_1920.jpg);
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            text-align: center;
+            box-shadow: rgb(112, 112, 112) 10px 10px;
+            font-size: 1.5rem;
+            font-weight:lighter;
+
+        }
+
+        h3{
+            display: block;
+            width: 100%;
+            text-align: right;
+
+        }
+        button:hover{
+            cursor: pointer;
+            font-size: 2.1rem;
+        }
+
+        button:active{
+            background: black;
+        }
+        button{
+            font-family: 'Baloo Bhai 2', cursive;
+            width: 650px;
+            height: 60px;
+            font-size: 2rem;
+            border-radius: 10px;
+            color: white;
+            background: rgb(32, 70, 119);
+            margin: 0px;
+            padding: 0px;
+            font-weight: bold;
+            
+        }
+
+        .loader{
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #3498db;
+            width: 120px;
+            height: 120px;
+
+        }
+
+        .load{
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #000000;
+            width: 120px;
+            height: 120px;
+            animation-name: spin;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+            animation-duration: 2s;
+
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div id="quotes" class = "loader">
+            <div class="load">
+
+            </div>
+        </div>
+        
+
+        <button id='btn'>New Quote</button>
+
+    </div>
+    
+
+    <script>
+        const api = "https://type.fit/api/quotes";
+        var btn = document.getElementById('btn');
+        var container = document.getElementById('quotes');
+        const getquote = async ()=>{
+            const data = await fetch(api);
+            const quoteArray = await data.json();
+            const quoteObj = quoteArray[Math.round(Math.random()*100)];
+            const author = quoteObj.author;
+            if(author === null)
+            {
+                author = "unknown";
+            }
+
+            container.innerHTML = `<h1>&ldquo;&nbsp;${quoteObj.text}&nbsp;&rdquo;</h1>
+            <h3>By ${author}</h3>`;
+            
+        }
+
+        getquote();
+
+        btn.addEventListener('click',getquote);
+
+    </script>
+</body>
+</html>
