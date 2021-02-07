@@ -1,5 +1,5 @@
 # Dynamic-Quotes-Project-using-HTML-CSS-Javascript
-This is a project based on HTML , CSS and javascript . It Fetches data in real Quotes from a API and displays it as a UI.
+This is a project based on HTML , CSS and javascript . It Fetches real Quotes using a API and displays it as a UI.
 This is a Frontend Project and does not involve any backend.
 
 
